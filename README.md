@@ -1,5 +1,4 @@
-INTRODUCTION
-------------
+# INTRODUCTION #
 
 The Steinhart-Hart equation is the most widely used tool to interpolate 
 the NTC thermistor resistance/temperature curve. It is a third order
@@ -20,15 +19,15 @@ it might be cheaper and easier to just buy a thermistor with known specs.
 To get readings from a thermistor into your Arduino you will have to use
 a conventional voltage divider circuit.
 
-              ____         ____
-    +5 o-----|____|---+---|____|---o GND
-            NTC 10K   |     10K
-                      | 
-PIN A0 o--------------+
+	              ____         ____
+	VCC +5 o-----|____|---+---|____|---o GND
+	            NTC 10K   |     10K
+	                      | 
+	PIN A0 o--------------+
 
 
-INSTALLATION 
-------------
+## INSTALLATION ##
+
 For a tutorial on how to install new libraries for use with the Arduino
 development environment please refer to the following website:
 http://www.arduino.cc/en/Reference/Libraries
