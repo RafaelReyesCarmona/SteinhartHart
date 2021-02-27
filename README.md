@@ -12,9 +12,9 @@ In the standard Steinhart-Hart equation the C parameter is set to zero.
 However, some manufacturers use all 4 coefficients. So we can use standard Steinhart-Hart
 ecuation with 3 coefficients. 
  
-	1                          3                        (beta *(1/T - 1/298.15))
-	- = A + B * ln (R) + C * ln (R)  --->   R = NTC * e
-	T                                       
+	1                          3
+	- = A + B * ln (R) + C * ln (R)
+	T
  
 where:
 * **T** is the temperature (in kelvins),
