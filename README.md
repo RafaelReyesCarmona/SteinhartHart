@@ -1,4 +1,8 @@
-# INTRODUCTION #
+# SteinhartHart library #
+
+Library to used to derive a precise temperature of a thermistor, fastest Calc. 
+
+## Introduction ##
 
 The Steinhart-Hart equation is the most widely used tool to interpolate 
 the NTC thermistor resistance/temperature curve. It is a third order
@@ -36,21 +40,25 @@ where:
 * **beta** are the Steinhart-Hart beta coefficient that vary depending on the type and model of Thermistor. 
 These can usually be found in the data sheet.
 
+[Look here](https://en.wikipedia.org/wiki/Steinhart–Hart_equation?wprov=sfla1) for more information about Steinhart-Hart ecuations. 
+
 ## Fast Calc ##
 
-This library Calc 
-	R     (beta/T - beta/298,15)                  beta   beta        ln(R/NTC)   1     1
- *    --- = e                         ,, ln(R/NTC) = ---- - ------  ,,  --------- = - - ------- ,,
- *    NTC                                             T     298,15        beta      T   298,15
+In this library, it is take the beta ecuation and calculate temperature of the thermistor from it. 
+
+	 R     (beta/T - beta/298,15)                  beta   beta        ln(R/NTC)   1     1
+	--- = e                         ,, ln(R/NTC) = ---- - ------  ,,  --------- = - - ------- ,,
+	NTC                                             T     298,15        beta      T   298,15
  
- *    1      1     ln(R) - ln(NTC)        1     ln(R/NTC)     beta + 298,15 * ln(R/NTC)
- *    - = ------ + ---------------  =  ------ + ---------  =  -------------------------
- *    T   298,15        beta           298,15     beta             beta * 298,15
- * 
- *                              beta * T0                    (T0 = 298,15)
- *                    T = ----------------------
- *                         beta + T0 + ln(R/NTC) 
- */	
+	1      1     ln(R) - ln(NTC)        1     ln(R/NTC)     beta + 298,15 * ln(R/NTC)
+	- = ------ + ---------------  =  ------ + ---------  =  -------------------------
+	T   298,15        beta           298,15     beta             beta * 298,15
+
+So we can solve using this formula:
+
+	          beta * T0                    (T0 = 298,15)
+	T = ----------------------
+	     beta + T0 + ln(R/NTC) 
 
 Thermistor values denote their resistance at 25°C. A popular type would
 be an NTC 10K which would give roughly 10 kOhms at that temperature point.
