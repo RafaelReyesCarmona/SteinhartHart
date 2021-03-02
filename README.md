@@ -40,7 +40,15 @@ where:
 * **beta** are the Steinhart-Hart beta coefficient that vary depending on the type and model of Thermistor. 
 These can usually be found in the data sheet.
 
+## More Information ##
+
 [Look here](https://en.wikipedia.org/wiki/Steinhart–Hart_equation?wprov=sfla1) for more information about Steinhart-Hart ecuations. 
+
+You can learn more about [temperature coefficient here](https://en.wikipedia.org/wiki/Temperature_coefficient?wprov=sfla1). 
+
+More information:
+* [Arrhenius equation](https://en.wikipedia.org/wiki/Arrhenius_equation?wprov=sfla1). 
+* [Q10 temperature coefficient](https://en.wikipedia.org/wiki/Q10_%28temperature_coefficient%29). 
 
 ## Fast Calc ##
 
@@ -58,7 +66,12 @@ So we can solve using this formula:
 
 	          beta * T0                    (T0 = 298,15)
 	T = ----------------------
-	     beta + T0 + ln(R/NTC) 
+	     beta + T0 * ln(R/NTC) 
+
+The library is 26~18% faster than others libraries to
+get temperature from Thermistor. Use example for test. 
+
+## How to use Thermistor as temperature sensor ##
 
 Thermistor values denote their resistance at 25°C. A popular type would
 be an NTC 10K which would give roughly 10 kOhms at that temperature point.
