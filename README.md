@@ -42,6 +42,8 @@ These can usually be found in the data sheet.
 
 ## More Information ##
 
+[Thermistor](https://en.wikipedia.org/wiki/Thermistor?wprov=sfla1) is the principal element of temperature sensor.
+
 [Look here](https://en.wikipedia.org/wiki/Steinhart–Hart_equation?wprov=sfla1) for more information about Steinhart-Hart ecuations. 
 
 You can learn more about [temperature coefficient here](https://en.wikipedia.org/wiki/Temperature_coefficient?wprov=sfla1). 
@@ -64,9 +66,11 @@ In this library, it is take the beta ecuation and calculate temperature of the t
 
 So we can solve using this formula:
 
-	          beta * T0                    (T0 = 298,15)
+	          beta * T0
 	T = ----------------------
-	     beta + T0 * ln(R/NTC) 
+	     beta + T0 * ln(R/NTC)
+	
+	(T0 = 298,15)
 
 The library is 26~18% faster than others libraries to
 get temperature from Thermistor. Use example for test. 
