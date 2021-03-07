@@ -87,7 +87,7 @@ be an NTC 10K which would give roughly 10 kOhms at that temperature point.
 
 Although there are ways to calculate the coefficients yourself experimentally
 it might be cheaper and easier to just buy a thermistor with known specs. This page 
-can help to calculate thats coefficients. 
+can help to calculate thats coefficients. [Thermistor Calculator V1.1](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html).
 
 To get readings from a thermistor into your Arduino you will have to use
 a conventional voltage divider circuit.
