@@ -75,6 +75,8 @@ So we can solve using this formula:
 The library is 26~18% faster than others libraries to
 get temperature from Thermistor. Use example for test. 
 
+[![Thermistor Calculator](img/Screenshot_20210307_012630.jpg)](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
+
 Using the [Thermistor Calculator V1.1](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
 you can de termine the unknowns parameters of a thermistor. 
 
