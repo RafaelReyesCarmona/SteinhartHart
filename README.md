@@ -75,6 +75,9 @@ So we can solve using this formula:
 The library is 26~18% faster than others libraries to
 get temperature from Thermistor. Use example for test. 
 
+Using the [Thermistor Calculator V1.1](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
+you can de termine the unknowns parameters of a thermistor. 
+
 ## How to use Thermistor as temperature sensor ##
 
 Thermistor values denote their resistance at 25°C. A popular type would
