@@ -1,5 +1,7 @@
 # SteinhartHart library #
 
+[![Arduino ©: SteinhartHart](https://img.shields.io/badge/Arduino©-SteinhartHart-red?style=for-the-badge&logo=arduino)](README.md)
+
 Library to used to derive a precise temperature of a thermistor, fastest Calc. 
 
 ## Introduction ##
@@ -42,6 +44,8 @@ These can usually be found in the data sheet.
 
 ## More Information ##
 
+[Thermistor](https://en.wikipedia.org/wiki/Thermistor?wprov=sfla1) is the principal element of temperature sensor.
+
 [Look here](https://en.wikipedia.org/wiki/Steinhart–Hart_equation?wprov=sfla1) for more information about Steinhart-Hart ecuations. 
 
 You can learn more about [temperature coefficient here](https://en.wikipedia.org/wiki/Temperature_coefficient?wprov=sfla1). 
@@ -64,12 +68,19 @@ In this library, it is take the beta ecuation and calculate temperature of the t
 
 So we can solve using this formula:
 
-	          beta * T0                    (T0 = 298,15)
+	          beta * T0
 	T = ----------------------
-	     beta + T0 * ln(R/NTC) 
+	     beta + T0 * ln(R/NTC)
+	
+	(T0 = 298,15)
 
 The library is 26~18% faster than others libraries to
 get temperature from Thermistor. Use example for test. 
+
+[![Thermistor Calculator](img/Screenshot_20210307_012630.jpg)](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
+
+Using the [Thermistor Calculator V1.1](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
+you can de termine the unknowns parameters of a thermistor. 
 
 ## How to use Thermistor as temperature sensor ##
 
@@ -78,7 +89,7 @@ be an NTC 10K which would give roughly 10 kOhms at that temperature point.
 
 Although there are ways to calculate the coefficients yourself experimentally
 it might be cheaper and easier to just buy a thermistor with known specs. This page 
-can help to calculate thats coefficients. 
+can help to calculate thats coefficients. [Thermistor Calculator V1.1](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html).
 
 To get readings from a thermistor into your Arduino you will have to use
 a conventional voltage divider circuit.
@@ -90,10 +101,28 @@ a conventional voltage divider circuit.
 	PIN A0 o--------------+
 
 
-## INSTALLATION ##
+## Installation ##
 
 For a tutorial on how to install new libraries for use with the Arduino
 development environment please refer to the following website:
 http://www.arduino.cc/en/Reference/Libraries
 
 
+## License ##
+
+This file is part of SteinhartHart Library.
+
+SteinhartHart Library is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+SteinhartHart lLibrary is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with SteinhartHart Library.  If not, see <https://www.gnu.org/licenses/>.
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+
+## Authors ##
+
+Copyright © 2021 Francisco Rafael Reyes Carmona. 
+Contact me: rafael.reyes.carmona@gmail.com 
+
+This is a fork of SteinhartHart work by [Andreas Tacke](https://github.com/fiendie/). If you want to know more about this work, visit the [Github page](https://github.com/fiendie/SteinhartHart).
