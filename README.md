@@ -1,5 +1,7 @@
 # SteinhartHart library #
 
+[![Arduino ©: SteinhartHart](https://img.shields.io/badge/Arduino©-SteinhartHart-red?style=for-the-badge&logo=arduino)](README.md)
+
 Library to used to derive a precise temperature of a thermistor, fastest Calc. 
 
 ## Introduction ##
@@ -123,4 +125,4 @@ You should have received a copy of the GNU General Public License along with Ste
 Copyright © 2021 Francisco Rafael Reyes Carmona. 
 Contact me: rafael.reyes.carmona@gmail.com 
 
-This is a fork of SteinhartHart work by Andreas Tacke. If you want to know more about this work, visit the [Github page](https://github.com/fiendie).
+This is a fork of SteinhartHart work by [Andreas Tacke](https://github.com/fiendie/). If you want to know more about this work, visit the [Github page](https://github.com/fiendie/SteinhartHart).
