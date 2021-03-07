@@ -99,10 +99,28 @@ a conventional voltage divider circuit.
 	PIN A0 o--------------+
 
 
-## INSTALLATION ##
+## Installation ##
 
 For a tutorial on how to install new libraries for use with the Arduino
 development environment please refer to the following website:
 http://www.arduino.cc/en/Reference/Libraries
 
 
+## License ##
+
+This file is part of SteinhartHart Library.
+
+SteinhartHart Library is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+SteinhartHart lLibrary is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with SteinhartHart Library.  If not, see <https://www.gnu.org/licenses/>.
+
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
+
+## Authors ##
+
+Copyright © 2021 Francisco Rafael Reyes Carmona. 
+Contact me: rafael.reyes.carmona@gmail.com 
+
+This is a fork of SteinhartHart work by Andreas Tacke. If you want to know more about this work, visit the [Github page](https://github.com/fiendie).
