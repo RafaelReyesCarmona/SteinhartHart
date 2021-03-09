@@ -35,84 +35,55 @@ rafael.reyes.carmona@gmail.com
 #ifndef SteinhartHart_h
 #define SteinhartHart_h
 
-#include <inttypes.h>
-
-#define V_IN 5.0	// Input voltage
-#define K 9.5		// Dissipation factor (mW/°C)
-
-
-class SteinhartHart {
-	public:	
-		/**
-		 * The reading pin has to be specified.
-		 * If no other parameters are given default values will be used.
-		 * These values are for a NTC 10k thermistor with a 10k resistor
-		 * put in parallel.
-		 */
-		SteinhartHart(
-			uint8_t reading_pin, 
-			double resistance = 10000.0, 
-			double a = 1.129148e-3, 
-			double b = 2.34125e-4, 
-			double c = 8.76741e-8) : 
-			_reading_pin(reading_pin), 
-			_resistance(resistance), 
-			_a(a), _b(b), _c(c) {};
-
-		double getTempKelvin();
-		double getTempCelsius();
-		double getTempFahrenheit();
-		
-	private:
-		double steinhartHart(double);
-		
-		// Value of the resistor put in parallel
-		double _resistance;	
-
-		uint8_t _reading_pin;
-
-		// Manufacturing constants
-		double _a;
-		double _b;
-		double _c;
-};
 
 class Thermistor {
     private:
-        int _ADC = 1023;
-        int _pin;
-        unsigned int _RESISTOR = 10000;
-        double _aval;
-        double _A1;
-        double _B1;
-        double _C1;
-        double _D1;
-        double _BETA;
-        double _resistance;
-        double _volts;
-        double calcVolts();
+        int _ADC_MAX = 1023;
+        int _PIN;
+        long _RESISTOR = 10000L;
+        long _NTC_25C = 0L;
+        double _A = 0.0;
+        double _B = 0.0;
+        double _C = 0.0;
+        double _D = 0.0;
+        double _BETA = 0.0;
         float _VREF;
-        double calcResistance(int numsamples = 15);
-        double getAval();
-        double getResistance();
-        int getAdc(int numsamples = 15);
+
+        double _VOLTS;
+        float _EMA_LOW = 0.79;
+        enum Thermistor_connection {
+          VCC,
+          GND
+        };
+
+        double calcVolts();
+        double calcNTC(Thermistor_connection ConType = VCC);
+        float getADC(int numsamples = 15);
+	void SteinhartHart();
+	void SteinhartHart_beta();
+	void SteinhartHart_fast();
+
     public:
         double _temp_k;
         double _temp_c;
-        double _temp_f;
 
-        Thermistor() = delete;
-        Thermistor(int, unsigned int, double, double, double, double, float); // Constructor para 4 parametros (A,B,C,D).
-//Thermistor(int pin, unsigned int RESISTOR, double A1, double B1, double C1, double D1, float VREF):_pin(pin), _RESISTOR(RESISTOR), _A1(A1), _B1(B1), _C1(C1), _D1(D1), _VREF(VREF){};
-        Thermistor(int, unsigned int, double, double, double, float); // Constructor para 3 parametros (A,B,D.. C = 0).
-        Thermistor(int, unsigned int, double, float); // Constructor para parametro BETA del termistor.
-        Thermistor(const Thermistor&); // Constructor de copia.
+        Thermistor() = delete; // Constructor por defecto.
+        Thermistor(int, long, long, double, double, double, double, float); // Constructor para 4 parametros (A,B,C,D).
+        Thermistor(int, long, long, double, double, double, float); // Constructor para 3 parametros (A,B,D.. C = 0).
+        Thermistor(int, long, long, double, float); // Constructor para parametro BETA del termistor.
+        Thermistor(const Thermistor&) = delete; // Constructor de copia.
         
-        void setADC(int ADC):ADC(_ADC){};
-        double getTempF();
-        double getTempC();
-        double getTempK();
-        double getVolts();
+        void setADC(int ADC):_ADC_MAX(ADC){};
+
+	double getTempKelvin();
+	double getTempCelsius();
+	double getTempFahrenheit();
+
+	double fastTempKelvin();
+	double fastTempCelsius();
+	double fastTempFahrenheit();
+
+	void calcBETA(float, long, float, long);
 };
 
 #endif

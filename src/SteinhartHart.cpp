@@ -28,38 +28,136 @@ rafael.reyes.carmona@gmail.com
 #include "SteinhartHart.h"
 #include <math.h>	
 
-	
-/**
- * Returns the temperature in kelvin for the given resistance value
- * using the Steinhart-Hart polynom.
- */
-double SteinhartHart::steinhartHart(double r)
-{
-	double log_r  = log(r);
-	double log_r3 = log_r * log_r * log_r;
+// Constructor para 4 parametros (A,B,C,D).	
+Thermistor::Thermistor(
+			int PIN, 
+                       long RESISTOR, 
+                       long NTC_25C,
+                       double A, 
+                       double B, 
+                       double C, 
+                       double D, 
+                       float VREF){
+  _PIN = PIN;
+  _RESISTOR = RESISTOR;
+  _NTC_25C = NTC_25C;
+  _A = A;
+  _B = B;
+  _C = C;
+  _D = D;
+  _VREF = VREF;
 
-	return 1.0 / (_a + _b * log_r + _c * log_r3);
+  pinMode(_PIN, INPUT);
+}
+
+// Constructor para 3 parametros (A,B,D.. C = 0).
+Thermistor::Thermistor(
+			int PIN, 
+                       long RESISTOR, 
+                       long NTC_25C,
+                       double A, 
+                       double B, 
+                       double D, 
+                       float VREF){
+  _PIN = PIN;
+  _RESISTOR = RESISTOR;
+  _NTC_25C = NTC_25C;
+  _A = A;
+  _B = B;
+  _D = D;
+  _VREF = VREF;
+
+  pinMode(_PIN, INPUT);
+}
+
+// Constructor para parametro BETA del termistor.
+Thermistor::Thermistor(
+			int PIN, 
+                       long RESISTOR, 
+                       long NTC_25C,
+                       double BETA,
+                       float VREF){
+  _PIN = PIN;
+  _RESISTOR = RESISTOR;
+  _NTC_25C = NTC_25C;
+  _BETA = BETA;
+  _VREF = VREF;
+
+  pinMode(_PIN, INPUT);
 }
 
 
-double SteinhartHart::getTempKelvin() 
-{
-	double adc_raw = analogRead(_reading_pin);
-	double voltage = adc_raw / 1024 * V_IN;
-	double resistance = ((1024 * _resistance / adc_raw) - _resistance);
-	
-	// Account for dissipation factor K
-	return steinhartHart(resistance) - voltage * voltage / (K * _resistance);
+void Thermistor::SteinhartHart(){
+  float E = log(calcNTC()/(float)_NTC_25C);
+  _temp_k = _A + (_B*E) + (_C*(E*E)) + (_D*(E*E*E));
+  _temp_k = 1.0 / _temp_k;
+  _temp_c = _temp_k - 273.15;
 }
 
 
-double SteinhartHart::getTempCelsius() 
-{
-	return getTempKelvin() - 273.15;
+void Thermistor::SteinhartHart_beta(){
+  _temp_k = log(calcNTC()/(float)_NTC_25C);
+  _temp_k /= _BETA;
+  _temp_k += 1.0 / 298.15;
+  _temp_k = 1.0 / _temp_k;
+  _temp_c = _temp_k - 273.15;
 }
 
 
-double SteinhartHart::getTempFahrenheit()
+void Thermistor::SteinhartHart_fast(){
+  _temp_k = log(calcNTC()/(float)_NTC_25C);
+  _temp_k *= 298.15;
+  _temp_k += _BETA;
+  _temp_k = (_BETA * 298.15) / _temp_k;
+  _temp_c = _temp_k - 273.15; 
+}
+
+
+double Thermistor::getTempKelvin() 
 {
-	return getTempCelsius() * 9/5 + 32;
+  _BETA > 0.0 ? SteinhartHart_beta() : SteinhartHart();
+  return _temp_k;
+}
+
+
+double Thermistor::getTempCelsius() 
+{
+  _BETA > 0.0 ? SteinhartHart_beta() : SteinhartHart();
+  return _temp_c;
+}
+
+
+double Thermistor::getTempFahrenheit()
+{
+  return getTempCelsius() * 9/5 + 32;
+}
+
+
+float Thermistor::getADC(int numsamples = 15){
+  float EMA_LOW;
+
+  EMA_LOW = analogRead(_PIN);
+
+  for (byte i = numsamples; i—; ){
+    delayMicroseconds(120);
+    EMA_LOW = (_alphaEMA_LOW * (float)analogRead(_PIN)) + (1.0 - _alphaEMA_LOW) * EMA_LOW);
+  }
+
+  return EMA_LOW;
+}
+
+
+double Thermistor::calcNTC(Thermistor_connection ConType){
+  double NTC;
+  float ADC = getADC();
+  if (ConType == VCC){
+    NTC = (float)_ADC_MAX * (float)_RESISTOR;
+    NTC -= ADC * (float)_RESISTOR;
+    NTC /= ADC;
+    return NTC;
+  }
+    NTC = ADC * _VREF / _ADC_MAX;
+    NTC = NTC / (_VREF - NTC);
+    NTC *= (float)_RESISTOR;
+    return NTC;
 }
