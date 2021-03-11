@@ -168,7 +168,7 @@ double Thermistor::calcNTC(Thermistor_connection ConType){
     NTC /= ADC_VALUE;
     return NTC;
   }
-    NTC = ADC * _VREF / (float)_ADC_MAX;
+    NTC = ADC_VALUE * _VREF / (float)_ADC_MAX;
     NTC /= (_VREF - NTC);
     NTC *= (float)_RESISTOR;
     return NTC;
