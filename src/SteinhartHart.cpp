@@ -73,7 +73,7 @@ Thermistor::Thermistor(int PIN,
 Thermistor::Thermistor(int PIN, 
                        long RESISTOR, 
                        long NTC_25C,
-                       double BETA,
+                       float BETA,
                        float VREF){
   _PIN = PIN;
   _RESISTOR = RESISTOR;
@@ -145,14 +145,14 @@ double Thermistor::fastTempFahrenheit(){
 }
 
 
-float Thermistor::getADC(int numsamples = 15){
+float Thermistor::getADC(int numsamples){
   float EMA_LOW;
 
   EMA_LOW = analogRead(_PIN);
 
-  for (byte i = numsamples; i—; ){
+  for (byte i = numsamples; i--; ){
     delayMicroseconds(120);
-    EMA_LOW = (_alphaEMA_LOW * (float)analogRead(_PIN)) + (1.0 - _alphaEMA_LOW) * EMA_LOW);
+    EMA_LOW = (_alphaEMA_LOW * (float)analogRead(_PIN)) + ((1.0 - _alphaEMA_LOW) * EMA_LOW);
   }
 
   return EMA_LOW;
@@ -161,11 +161,11 @@ float Thermistor::getADC(int numsamples = 15){
 
 double Thermistor::calcNTC(Thermistor_connection ConType){
   double NTC;
-  float ADC = getADC();
+  float ADC_VALUE = getADC(15);
   if (ConType == VCC){
     NTC = (float)_ADC_MAX * (float)_RESISTOR;
-    NTC -= ADC * (float)_RESISTOR;
-    NTC /= ADC;
+    NTC -= ADC_VALUE * (float)_RESISTOR;
+    NTC /= ADC_VALUE;
     return NTC;
   }
     NTC = ADC * _VREF / (float)_ADC_MAX;
@@ -178,4 +178,14 @@ double Thermistor::calcNTC(Thermistor_connection ConType){
 void Thermistor::calcBETA(float T1, long RT1, float T2, long RT2){
   _BETA = log(RT1/RT2);
   _BETA /= ((T2 - T1) / (T1 * T2)); // _BETA /= (1/T1) - (1/T2);
+}
+
+
+void Thermistor::setADC(int ADC_MAX){
+  _ADC_MAX = ADC_MAX;
+}
+
+
+void Thermistor::setEMA(float EMA){
+  _alphaEMA_LOW = EMA;
 }

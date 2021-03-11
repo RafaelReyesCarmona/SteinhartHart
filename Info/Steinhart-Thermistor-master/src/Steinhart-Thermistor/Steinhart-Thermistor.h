@@ -1,1 +1,0 @@
-#include "../Steinhart-Thermistor.h"

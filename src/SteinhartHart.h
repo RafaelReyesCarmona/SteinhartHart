@@ -47,11 +47,11 @@ class Thermistor {
         double _B = 0.0;
         double _C = 0.0;
         double _D = 0.0;
-        double _BETA = 0.0;
+        float _BETA = 0.0;
         float _VREF;
 
         // double _VOLTS;
-        float _EMA_LOW = 0.79;
+        float _alphaEMA_LOW = 0.79;
         enum Thermistor_connection {
           VCC,
           GND
@@ -59,7 +59,7 @@ class Thermistor {
 
         // double calcVolts();
         double calcNTC(Thermistor_connection ConType = VCC);
-        float getADC(int numsamples = 15);
+        float getADC(int);
         void SteinhartHart();
         void SteinhartHart_beta();
         void SteinhartHart_fast();
@@ -71,11 +71,11 @@ class Thermistor {
         Thermistor() = delete; // Constructor por defecto.
         Thermistor(int, long, long, double, double, double, double, float); // Constructor para 4 parametros (A,B,C,D).
         Thermistor(int, long, long, double, double, double, float); // Constructor para 3 parametros (A,B,D.. C = 0).
-        Thermistor(int, long, long, double, float); // Constructor para parametro BETA del termistor.
+        Thermistor(int, long, long, float, float); // Constructor para parametro BETA del termistor.
         Thermistor(const Thermistor&) = delete; // Constructor de copia.
         
-        void setADC(int ADC):_ADC_MAX(ADC){};
-        void setEMA(float EMA):_EMA_LOW(EMA){};
+        void setADC(int);
+        void setEMA(float);
 
         double getTempKelvin();
         double getTempCelsius();
