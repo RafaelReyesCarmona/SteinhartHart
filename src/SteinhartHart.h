@@ -1,5 +1,6 @@
 /*
-SteinhartHart.h - Library to used to derive a precise temperature of a thermistor, fastest Calc (26~18% faster)
+SteinhartHart.h - Library to used to derive a precise temperature of a thermistor, 
+fastest Calc (26~18% faster)
 v0.1
 
 Copyright © 2021 Francisco Rafael Reyes Carmona. 
@@ -49,19 +50,19 @@ class Thermistor {
         double _BETA = 0.0;
         float _VREF;
 
-        double _VOLTS;
+        // double _VOLTS;
         float _EMA_LOW = 0.79;
         enum Thermistor_connection {
           VCC,
           GND
         };
 
-        double calcVolts();
+        // double calcVolts();
         double calcNTC(Thermistor_connection ConType = VCC);
         float getADC(int numsamples = 15);
-	void SteinhartHart();
-	void SteinhartHart_beta();
-	void SteinhartHart_fast();
+        void SteinhartHart();
+        void SteinhartHart_beta();
+        void SteinhartHart_fast();
 
     public:
         double _temp_k;
@@ -74,16 +75,17 @@ class Thermistor {
         Thermistor(const Thermistor&) = delete; // Constructor de copia.
         
         void setADC(int ADC):_ADC_MAX(ADC){};
+        void setEMA(float EMA):_EMA_LOW(EMA){};
 
-	double getTempKelvin();
-	double getTempCelsius();
-	double getTempFahrenheit();
+        double getTempKelvin();
+        double getTempCelsius();
+        double getTempFahrenheit();
 
-	double fastTempKelvin();
-	double fastTempCelsius();
-	double fastTempFahrenheit();
+        double fastTempKelvin();
+        double fastTempCelsius();
+        double fastTempFahrenheit();
 
-	void calcBETA(float, long, float, long);
+        void calcBETA(float, long, float, long);
 };
 
 #endif

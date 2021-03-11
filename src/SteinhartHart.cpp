@@ -1,5 +1,6 @@
 /*
-SteinhartHart.cpp - Library to used to derive a precise temperature of a thermistor, fastest Calc (26~18% faster)
+SteinhartHart.cpp - Library to used to derive a precise temperature of a thermistor, 
+fastest Calc (26~18% faster)
 v0.1
 
 Copyright © 2021 Francisco Rafael Reyes Carmona. 
@@ -29,8 +30,7 @@ rafael.reyes.carmona@gmail.com
 #include <math.h>	
 
 // Constructor para 4 parametros (A,B,C,D).	
-Thermistor::Thermistor(
-			int PIN, 
+Thermistor::Thermistor(int PIN, 
                        long RESISTOR, 
                        long NTC_25C,
                        double A, 
@@ -51,8 +51,7 @@ Thermistor::Thermistor(
 }
 
 // Constructor para 3 parametros (A,B,D.. C = 0).
-Thermistor::Thermistor(
-			int PIN, 
+Thermistor::Thermistor(int PIN, 
                        long RESISTOR, 
                        long NTC_25C,
                        double A, 
@@ -71,8 +70,7 @@ Thermistor::Thermistor(
 }
 
 // Constructor para parametro BETA del termistor.
-Thermistor::Thermistor(
-			int PIN, 
+Thermistor::Thermistor(int PIN, 
                        long RESISTOR, 
                        long NTC_25C,
                        double BETA,
@@ -113,23 +111,37 @@ void Thermistor::SteinhartHart_fast(){
 }
 
 
-double Thermistor::getTempKelvin() 
-{
+double Thermistor::getTempKelvin() {
   _BETA > 0.0 ? SteinhartHart_beta() : SteinhartHart();
   return _temp_k;
 }
 
 
-double Thermistor::getTempCelsius() 
-{
+double Thermistor::getTempCelsius() {
   _BETA > 0.0 ? SteinhartHart_beta() : SteinhartHart();
   return _temp_c;
 }
 
 
-double Thermistor::getTempFahrenheit()
-{
+double Thermistor::getTempFahrenheit(){
   return getTempCelsius() * 9/5 + 32;
+}
+
+
+double Thermistor::fastTempKelvin() {
+  _BETA > 0.0 ? SteinhartHart_fast() : SteinhartHart();
+  return _temp_k;
+}
+
+
+double Thermistor::fastTempCelsius() {
+  _BETA > 0.0 ? SteinhartHart_fast() : SteinhartHart();
+  return _temp_c;
+}
+
+
+double Thermistor::fastTempFahrenheit(){
+  return fastTempCelsius() * 9/5 + 32;
 }
 
 
@@ -156,8 +168,14 @@ double Thermistor::calcNTC(Thermistor_connection ConType){
     NTC /= ADC;
     return NTC;
   }
-    NTC = ADC * _VREF / _ADC_MAX;
-    NTC = NTC / (_VREF - NTC);
+    NTC = ADC * _VREF / (float)_ADC_MAX;
+    NTC /= (_VREF - NTC);
     NTC *= (float)_RESISTOR;
     return NTC;
+}
+
+
+void Thermistor::calcBETA(float T1, long RT1, float T2, long RT2){
+  _BETA = log(RT1/RT2);
+  _BETA /= ((T2 - T1) / (T1 * T2)); // _BETA /= (1/T1) - (1/T2);
 }
