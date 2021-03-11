@@ -39,7 +39,7 @@ rafael.reyes.carmona@gmail.com
 
 class Thermistor {
     private:
-        int _ADC_MAX = 1023;
+        int _ADC_MAX = 1024;  // From ATMega328P datasheet formula: ADC=(Vin*1024)/Vref.
         int _PIN;
         long _RESISTOR = 10000L;
         long _NTC_25C = 0L;
