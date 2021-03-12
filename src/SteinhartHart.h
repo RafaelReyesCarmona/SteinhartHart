@@ -1,7 +1,7 @@
 /*
 SteinhartHart.h - Library to used to derive a precise temperature of a thermistor, 
 fastest Calc (26~18% faster)
-v0.1
+v0.1.1
 
 Copyright © 2021 Francisco Rafael Reyes Carmona. 
 All rights reserved. 
@@ -39,7 +39,7 @@ rafael.reyes.carmona@gmail.com
 
 class Thermistor {
     private:
-        int _ADC_MAX = 1024;  // From ATMega328P datasheet formula: ADC=(Vin*1024)/Vref.
+        int _ADC_MAX = 1024;
         int _PIN;
         long _RESISTOR = 10000L;
         long _NTC_25C = 0L;
@@ -50,7 +50,8 @@ class Thermistor {
         float _BETA = 0.0;
         float _VREF;
 
-        // double _VOLTS;
+        bool _DEBUG_TIME;
+        unsigned long _time;
         float _alphaEMA_LOW = 0.79;
         enum Thermistor_connection {
           VCC,
@@ -86,6 +87,8 @@ class Thermistor {
         double fastTempFahrenheit();
 
         void calcBETA(float, long, float, long);
+        
+        void setDEBUG(bool);
 };
 
 #endif

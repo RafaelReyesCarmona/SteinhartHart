@@ -1,7 +1,7 @@
 /*
 SteinhartHart.cpp - Library to used to derive a precise temperature of a thermistor, 
 fastest Calc (26~18% faster)
-v0.1
+v0.1.1
 
 Copyright © 2021 Francisco Rafael Reyes Carmona. 
 All rights reserved. 
@@ -46,33 +46,31 @@ Thermistor thermistor1(/* PIN */       A1,
                       /* NTC 25ºC */  9950L, 
                       /* BETA */      4190.0, 
                       /* Vref */      5.03);
-unsigned long time0;
-unsigned long time1;
-unsigned long curtime;
 
 void setup(void)
 {
-	Serial.begin(9600);
+  Serial.begin(57600);
+  thermistor0.setDEBUG(1);
+  thermistor1.setDEBUG(1);
 }
 
 
 void loop(void) 
 {
-  time0 = micros();
-  double sensor0 = thermistor0.getTempCelsius();
-  time1 = micros();
-  double sensor1 = thermistor1.fastTempCelsius();
-  curtime = micros();
-	
   Serial.print("Sensor0(°C): ");
-  Serial.print(sensor0);
-  Serial.print(" calculated in (microsecs): ");
-  Serial.println(time1-time0);
-	
+  double sensor0 = thermistor0.getTempCelsius();
+  Serial.print(" (microsecs) to calc. Temp(ºC): ");
+  Serial.println(sensor0);
+
   Serial.print("Sensor1(°C): ");
-  Serial.print(sensor1);
-  Serial.print(" calculated in (microsecs): ");
-  Serial.println(curtime-time1);
+  double sensor1 = thermistor1.getTempCelsius(); 
+  Serial.print(" (microsecs) to calc. Temp(ºC): ");
+  Serial.println(sensor1);
+
+  Serial.print("Sensor1_fast(°C): ");
+  double sensor1_fast = thermistor1.fastTempCelsius(); 
+  Serial.print(" (microsecs) to calc. Temp(ºC): ");
+  Serial.println(sensor1_fast);
   
-	delay(1000);
+  delay(1000);
 }

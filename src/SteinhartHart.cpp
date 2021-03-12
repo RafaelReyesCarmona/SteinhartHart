@@ -1,7 +1,7 @@
 /*
 SteinhartHart.cpp - Library to used to derive a precise temperature of a thermistor, 
 fastest Calc (26~18% faster)
-v0.1
+v0.1.1
 
 Copyright © 2021 Francisco Rafael Reyes Carmona. 
 All rights reserved. 
@@ -87,27 +87,33 @@ Thermistor::Thermistor(int PIN,
 
 void Thermistor::SteinhartHart(){
   float E = log(calcNTC()/(float)_NTC_25C);
+  if(_DEBUG_TIME) _time = micros(); 
   _temp_k = _A + (_B*E) + (_C*(E*E)) + (_D*(E*E*E));
   _temp_k = 1.0 / _temp_k;
   _temp_c = _temp_k - 273.15;
+  if (_DEBUG_TIME) Serial.print(micros()-_time); 
 }
 
 
 void Thermistor::SteinhartHart_beta(){
   _temp_k = log(calcNTC()/(float)_NTC_25C);
+  if(_DEBUG_TIME) _time = micros(); 
   _temp_k /= _BETA;
   _temp_k += 1.0 / 298.15;
   _temp_k = 1.0 / _temp_k;
   _temp_c = _temp_k - 273.15;
+  if (_DEBUG_TIME) Serial.print(micros()-_time); 
 }
 
 
 void Thermistor::SteinhartHart_fast(){
   _temp_k = log(calcNTC()/(float)_NTC_25C);
+  if(_DEBUG_TIME) _time = micros(); 
   _temp_k *= 298.15;
   _temp_k += _BETA;
   _temp_k = (_BETA * 298.15) / _temp_k;
   _temp_c = _temp_k - 273.15; 
+  if (_DEBUG_TIME) Serial.print(micros()-_time); 
 }
 
 
@@ -188,4 +194,9 @@ void Thermistor::setADC(int ADC_MAX){
 
 void Thermistor::setEMA(float EMA){
   _alphaEMA_LOW = EMA;
+}
+
+
+void Thermistor::setDEBUG(bool DEBUG){
+  _DEBUG_TIME = DEBUG;
 }
