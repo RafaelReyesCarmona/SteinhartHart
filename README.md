@@ -11,7 +11,7 @@ The thermistor changes its resistance drastically with temperature.
 materials rises slightly as temperature rises, whereas NTC (negative 
 temperature coefficient) thermistors exhibit a sharp decrease in resistance. 
 For information about thermistor see manufacturer information. 
-Shibaura manufacturer has a lot of [thecnical information](https://www.shibauraelectronics.com/products/technical/indexx.html) 
+Shibaura manufacturer has a lot of [thecnical information](https://www.shibauraelectronics.com/products/technical/index.html) 
 about NTC thermistors. 
 
 The Steinhart-Hart equation is the most widely used tool to interpolate 
