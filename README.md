@@ -2,9 +2,17 @@
 
 [![Arduino ©: SteinhartHart](https://img.shields.io/badge/Arduino©-SteinhartHart-red?style=for-the-badge&logo=arduino)](README.md)
 
-Library to used to derive a precise temperature of a thermistor, fastest Calc. 
+Library to used to derive a precise temperature of a thermistor, fastest Calc. (14~29% faster than others) 
 
 ## Introduction ##
+
+The thermistor changes its resistance drastically with temperature. 
+"Thermistor" word comes from “thermally sensitive resistor". The resistance of ordinary 
+materials rises slightly as temperature rises, whereas NTC (negative 
+temperature coefficient) thermistors exhibit a sharp decrease in resistance. 
+For information about thermistor see manufacturer information. 
+Shibaura manufacturer has a lot of [thecnical information](https://www.shibauraelectronics.com/products/technical/index.html) 
+about NTC thermistors. 
 
 The Steinhart-Hart equation is the most widely used tool to interpolate 
 the NTC thermistor resistance/temperature curve. It is a third order
@@ -74,8 +82,15 @@ So we can solve using this formula:
 	
 	(T0 = 298,15)
 
-The library is 26~18% faster than others libraries to
-get temperature from Thermistor. Use example for test. 
+The library is 14-29% faster than others libraries to
+get temperature from Thermistor if we compare this library 
+with libraries based on beta equation. And it depends on the 
+board used. Tested on LGT8F328P-SOPP, LGT8F328P-QF32 and Arduino pro mini boards. 
+If it is compared Fast Calc with Steinhart-Hart three orden equation, 
+it is 35-44% faster, depends on microcontroller used. See example for test. 
+
+(img/Test1.tiff)
+
 
 [![Thermistor Calculator](img/Screenshot_20210307_012630.jpg)](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
 
