@@ -89,10 +89,13 @@ board used. Tested on LGT8F328P-SOPP, LGT8F328P-QF32 and Arduino pro mini boards
 If it is compared Fast Calc with Steinhart-Hart three orden equation, 
 it is 35-44% faster, depends on microcontroller used. See example for test. 
 
-(img/Test1.png)
+(img/Test1.jpg)
 
 Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** Fast Calc equation. 
 
+(img/Test2.jpg)
+
+(img/Test3.jpg)
 
 [![Thermistor Calculator](img/Screenshot_20210307_012630.jpg)](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
 
