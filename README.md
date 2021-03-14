@@ -89,13 +89,26 @@ board used. Tested on LGT8F328P-SOPP, LGT8F328P-QF32 and Arduino pro mini boards
 If it is compared Fast Calc with Steinhart-Hart three orden equation, 
 it is 35-44% faster, depends on microcontroller used. See example for test. 
 
-(img/Test1.jpg)
+![Test1 picture](img/Test1.jpg)
+Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** Fast Calc equation. LGT8F328P-SOPP board. (32 MHz) 
 
-Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** Fast Calc equation. 
+![Test2 picture](img/Test2.jpg) 
+Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** beta equation and **sensor1_fast** Fast Calc equation. LGT8F328P-QF32 board. (32 MHz) 
 
-(img/Test2.jpg)
+![Test3 picture](img/Test3.jpg)
+Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** beta equation and **sensor1_fast** Fast Calc equation. Atmega328p board. (16 MHz) 
 
-(img/Test3.jpg)
+## Calculation of beta##
+
+Beta is measured in degrees Kelvin (K) and is computed based on this equation:
+
+![b=ln(Rt1/Rt2) / ((1/T1)-(1/T2))](img/beta.jpg)
+Where:
+* **Rt1** = Resistance at Temperature 1 (ohms) 
+* **Rt2** = Resistance at Temperature 2 (ohms) 
+* **T1** = Temperature 1 (Kelvin)
+* **T2** = Temperature 2 in (Kelvin)
+How to Calc beta of NTC Thermistor, you can [see this page.](https://www.ametherm.com/thermistor/ntc-thermistor-beta) 
 
 [![Thermistor Calculator](img/Screenshot_20210307_012630.jpg)](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
 
