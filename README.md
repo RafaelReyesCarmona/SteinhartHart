@@ -98,15 +98,16 @@ Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** beta equati
 ![Test3 picture](img/Test3.jpg)
 Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** beta equation and **sensor1_fast** Fast Calc equation. Atmega328p board. (16 MHz) 
 
-## Calculation of beta##
+## Calculation of beta ##
 
 Beta is measured in degrees Kelvin (K) and is computed based on this equation:
 
-![b=ln(Rt1/Rt2) / ((1/T1)-(1/T2))](img/beta.jpg)
+![b=ln(Rt1/Rt2) / ((1/T1)-(1/T2))](img/Beta.jpg)
+
 Where:
 * **Rt1** = Resistance at Temperature 1 (ohms) 
 * **Rt2** = Resistance at Temperature 2 (ohms) 
-* **T1** = Temperature 1 (Kelvin)
+* **T1** = Temperature 1 in (Kelvin)
 * **T2** = Temperature 2 in (Kelvin)
 How to Calc beta of NTC Thermistor, you can [see this page.](https://www.ametherm.com/thermistor/ntc-thermistor-beta) 
 
