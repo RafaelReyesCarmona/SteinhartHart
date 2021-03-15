@@ -1,3 +1,5 @@
+<img src="img/celsius.png" width=48 height=48 align=right>
+
 # SteinhartHart library #
 
 [![Arduino ©: SteinhartHart](https://img.shields.io/badge/Arduino©-SteinhartHart-red?style=for-the-badge&logo=arduino)](README.md)
