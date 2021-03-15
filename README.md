@@ -24,12 +24,12 @@ In the standard Steinhart-Hart equation the C parameter is set to zero.
 However, some manufacturers use all 4 coefficients. So we can use standard Steinhart-Hart
 ecuation with 3 coefficients. 
 
-![Steinhart-Hart_3](img/Steinhart-3.png)
+![Steinhart-Hart_3](img/Steinhart-Hart_3.png)
 
 where:
 * **T** is the temperature (in kelvins),
 * **R** is the resistance at T (in ohms),
-* **A**, **B**, and **C** are the Steinhart–Hart coefficients, which vary depending on the type and model of thermistor and the temperature range of interest. 
+* **A**, **B**, and **D** are the Steinhart–Hart coefficients, which vary depending on the type and model of thermistor and the temperature range of interest. 
 These can usually be found in the data sheet.
 
 ## Other expressions ##
