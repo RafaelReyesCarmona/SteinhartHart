@@ -18,18 +18,14 @@ The Steinhart-Hart equation is the most widely used tool to interpolate
 the NTC thermistor resistance/temperature curve. It is a third order
 polynomial ecuation which provides very good curve fitting.
 
-	1                              2                3
-	- = A + B * ln (R/NTC) + C * ln (R/NTC) + D * ln (R/NTC)
-	T
+![Steinhart-Hart_4](img/Steinhart-Hart_4.png)
 
 In the standard Steinhart-Hart equation the C parameter is set to zero.
 However, some manufacturers use all 4 coefficients. So we can use standard Steinhart-Hart
 ecuation with 3 coefficients. 
- 
-	1                          3
-	- = A + B * ln (R) + C * ln (R)
-	T
- 
+
+![Steinhart-Hart_3](img/Steinhart-3.png)
+
 where:
 * **T** is the temperature (in kelvins),
 * **R** is the resistance at T (in ohms),
@@ -40,11 +36,11 @@ These can usually be found in the data sheet.
 
 Other form of the equation is the use of B (beta) parameter 
 
-	           (beta *(1/T - 1/298.15))
-	R = NTC * e
+![Steinhart-Hart_beta](img/Steinhart-Hart_beta.png)
 
 where:
-* **T** is the temperature (in kelvins),
+* **T** is the temperature (in kelvins)
+* **T0** is 298'15 ºK (25 ºC)
 * **R** is the resistance at T (in ohms),
 * **NTC** is the resistence of thermistor at 298'15 ºK (25 ºC) 
 * **beta** are the Steinhart-Hart beta coefficient that vary depending on the type and model of Thermistor. 
