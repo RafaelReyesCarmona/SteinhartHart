@@ -161,5 +161,5 @@ This is a fork of SteinhartHart work by [Andreas Tacke](https://github.com/fiend
 
 ## Credits ##
 
-Celsius icon at the beginning is from [Flaticon.es](www.flaticon.es) designed by [Those Icons](www.flaticon.es/autores/those-icons) 
+Celsius icon at the beginning is from [Flaticon.es](https://www.flaticon.es) designed by [Those Icons](https://www.flaticon.es/autores/those-icons) 
 and licensed by [free license](img/licencia-37862535.pdf). 
