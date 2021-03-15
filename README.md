@@ -158,3 +158,8 @@ Copyright © 2021 Francisco Rafael Reyes Carmona.
 Contact me: rafael.reyes.carmona@gmail.com 
 
 This is a fork of SteinhartHart work by [Andreas Tacke](https://github.com/fiendie/). If you want to know more about this work, visit the [Github page](https://github.com/fiendie/SteinhartHart).
+
+## Credits ##
+
+Celsius icon at the beginning is from [Flaticon.es](www.flaticon.es) designed by [Those Icons](www.flaticon.es/autores/those-icons) 
+and licensed by [free license](img/licencia-37862535.pdf). 
