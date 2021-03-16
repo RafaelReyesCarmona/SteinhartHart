@@ -183,7 +183,8 @@ double Thermistor::calcNTC(Thermistor_connection ConType){
 
 void Thermistor::calcBETA(float T1, long RT1, float T2, long RT2){
   _BETA = log(RT1/RT2);
-  _BETA /= ((T2 - T1) / (T1 * T2)); // _BETA /= (1/T1) - (1/T2);
+  _BETA *= T1 * T2;
+  _BETA /= (T2 - T1);
 }
 
 
