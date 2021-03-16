@@ -107,12 +107,15 @@ Where:
 * **Rt2** = Resistance at Temperature 2 (ohms) 
 * **T1** = Temperature 1 in (Kelvin)
 * **T2** = Temperature 2 in (Kelvin)
+
 How to Calc beta of NTC Thermistor, you can [see this page.](https://www.ametherm.com/thermistor/ntc-thermistor-beta) 
 
 [![Thermistor Calculator](img/Screenshot_20210307_012630.jpg)](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
 
 Using the [Thermistor Calculator V1.1](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html) 
 you can de termine the unknowns parameters of a thermistor. 
+
+For more information about NTC thermistors and Steinhart-Hart equation to calc the parameters using three pairs of values (temperature, NTC resistence) see [NTC Thermistors Steinhart and Hart Equation](https://www.ametherm.com/thermistor/ntc-thermistors-steinhart-and-hart-equation)
 
 ## How to use Thermistor as temperature sensor ##
 
