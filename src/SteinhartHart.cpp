@@ -85,8 +85,8 @@ Thermistor::Thermistor(int PIN,
 }
 
 
-void Thermistor::SteinhartHart(){
-  float E = log(calcNTC()/(float)_NTC_25C);
+void Thermistor::SteinhartHart(Thermistor_connection ConType){
+  float E = log(calcNTC(ConType)/(float)_NTC_25C);
   if(_DEBUG_TIME) _time = micros(); 
   _temp_k = _A + (_B*E) + (_C*(E*E)) + (_D*(E*E*E));
   _temp_k = 1.0 / _temp_k;
@@ -95,8 +95,8 @@ void Thermistor::SteinhartHart(){
 }
 
 
-void Thermistor::SteinhartHart_beta(){
-  _temp_k = log(calcNTC()/(float)_NTC_25C);
+void Thermistor::SteinhartHart_beta(Thermistor_connection ConType){
+  _temp_k = log(calcNTC(ConType)/(float)_NTC_25C);
   if(_DEBUG_TIME) _time = micros(); 
   _temp_k /= _BETA;
   _temp_k += 1.0 / 298.15;
@@ -106,8 +106,8 @@ void Thermistor::SteinhartHart_beta(){
 }
 
 
-void Thermistor::SteinhartHart_fast(){
-  _temp_k = log(calcNTC()/(float)_NTC_25C);
+void Thermistor::SteinhartHart_fast(Thermistor_connection ConType){
+  _temp_k = log(calcNTC(ConType)/(float)_NTC_25C);
   if(_DEBUG_TIME) _time = micros(); 
   _temp_k *= 298.15;
   _temp_k += _BETA;
@@ -117,37 +117,37 @@ void Thermistor::SteinhartHart_fast(){
 }
 
 
-double Thermistor::getTempKelvin() {
-  _BETA > 0.0 ? SteinhartHart_beta() : SteinhartHart();
+double Thermistor::getTempKelvin(Thermistor_connection ConType) {
+  _BETA > 0.0 ? SteinhartHart_beta(ConType) : SteinhartHart(ConType);
   return _temp_k;
 }
 
 
-double Thermistor::getTempCelsius() {
-  _BETA > 0.0 ? SteinhartHart_beta() : SteinhartHart();
+double Thermistor::getTempCelsius(Thermistor_connection ConType) {
+  _BETA > 0.0 ? SteinhartHart_beta(ConType) : SteinhartHart(ConType);
   return _temp_c;
 }
 
 
-double Thermistor::getTempFahrenheit(){
-  return getTempCelsius() * 9/5 + 32;
+double Thermistor::getTempFahrenheit(Thermistor_connection ConType){
+  return getTempCelsius(ConType) * 9/5 + 32;
 }
 
 
-double Thermistor::fastTempKelvin() {
-  _BETA > 0.0 ? SteinhartHart_fast() : SteinhartHart();
+double Thermistor::fastTempKelvin(Thermistor_connection ConType) {
+  _BETA > 0.0 ? SteinhartHart_fast(ConType) : SteinhartHart(ConType);
   return _temp_k;
 }
 
 
-double Thermistor::fastTempCelsius() {
-  _BETA > 0.0 ? SteinhartHart_fast() : SteinhartHart();
+double Thermistor::fastTempCelsius(Thermistor_connection ConType) {
+  _BETA > 0.0 ? SteinhartHart_fast(ConType) : SteinhartHart(ConType);
   return _temp_c;
 }
 
 
-double Thermistor::fastTempFahrenheit(){
-  return fastTempCelsius() * 9/5 + 32;
+double Thermistor::fastTempFahrenheit(Thermistor_connection ConType){
+  return fastTempCelsius(ConType) * 9/5 + 32;
 }
 
 
@@ -167,7 +167,7 @@ float Thermistor::getADC(int numsamples){
 
 double Thermistor::calcNTC(Thermistor_connection ConType){
   double NTC;
-  float ADC_VALUE = getADC(15);
+  float ADC_VALUE = getADC();
   if (ConType == VCC){
     NTC = (float)_ADC_MAX * (float)_RESISTOR;
     NTC -= ADC_VALUE * (float)_RESISTOR;

@@ -36,10 +36,15 @@ rafael.reyes.carmona@gmail.com
 #ifndef SteinhartHart_h
 #define SteinhartHart_h
 
+enum Thermistor_connection {
+  VCC,
+  GND
+  };
+
 
 class Thermistor {
     private:
-        int _ADC_MAX = 1024;
+        int _ADC_MAX = 1024;  //ADC max. value (1023) + 1 -> 1024.
         int _PIN;
         long _RESISTOR = 10000L;
         long _NTC_25C = 0L;
@@ -53,17 +58,13 @@ class Thermistor {
         bool _DEBUG_TIME;
         unsigned long _time;
         float _alphaEMA_LOW = 0.79;
-        enum Thermistor_connection {
-          VCC,
-          GND
-        };
 
         // double calcVolts();
         double calcNTC(Thermistor_connection ConType = VCC);
-        float getADC(int);
-        void SteinhartHart();
-        void SteinhartHart_beta();
-        void SteinhartHart_fast();
+        float getADC(int numsamples = 15);
+        void SteinhartHart(Thermistor_connection ConType = VCC);
+        void SteinhartHart_beta(Thermistor_connection ConType = VCC);
+        void SteinhartHart_fast(Thermistor_connection ConType = VCC);
 
     public:
         double _temp_k;
@@ -78,13 +79,13 @@ class Thermistor {
         void setADC(int);
         void setEMA(float);
 
-        double getTempKelvin();
-        double getTempCelsius();
-        double getTempFahrenheit();
+        double getTempKelvin(Thermistor_connection ConType = VCC);
+        double getTempCelsius(Thermistor_connection ConType = VCC);
+        double getTempFahrenheit(Thermistor_connection ConType = VCC);
 
-        double fastTempKelvin();
-        double fastTempCelsius();
-        double fastTempFahrenheit();
+        double fastTempKelvin(Thermistor_connection ConType = VCC);
+        double fastTempCelsius(Thermistor_connection ConType = VCC);
+        double fastTempFahrenheit(Thermistor_connection ConType = VCC);
 
         void calcBETA(float, long, float, long);
         
