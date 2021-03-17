@@ -31,7 +31,7 @@ ecuation with 3 coefficients.
 where:
 * **T** is the temperature (in kelvins),
 * **R** is the resistance at T (in ohms),
-* **A**, **B**, and **D** are the Steinhart–Hart coefficients, which vary depending on the type and model of thermistor and the temperature range of interest. 
+* **A**, **B**, **C** and **D** are the Steinhart–Hart coefficients, which vary depending on the type and model of thermistor and the temperature range of interest. 
 These can usually be found in the data sheet.
 
 ## Other expressions ##
@@ -53,6 +53,8 @@ These can usually be found in the data sheet.
 [Thermistor](https://en.wikipedia.org/wiki/Thermistor?wprov=sfla1) is the principal element of temperature sensor.
 
 [Look here](https://en.wikipedia.org/wiki/Steinhart–Hart_equation?wprov=sfla1) for more information about Steinhart-Hart ecuations. 
+
+See this page for info about [NTC Thermistors Steinhart and Hart Equation](https://www.ametherm.com/thermistor/ntc-thermistors-steinhart-and-hart-equation)
 
 You can learn more about [temperature coefficient here](https://en.wikipedia.org/wiki/Temperature_coefficient?wprov=sfla1). 
 
@@ -127,11 +129,21 @@ it might be cheaper and easier to just buy a thermistor with known specs. This p
 can help to calculate thats coefficients. [Thermistor Calculator V1.1](https://www.thinksrs.com/downloads/programs/therm%20calc/ntccalibrator/ntccalculator.html).
 
 To get readings from a thermistor into your Arduino you will have to use
-a conventional voltage divider circuit.
+a conventional voltage divider circuit. It can used two forms of configurations.
+
+*Connecting NTC thermistor to VCC:*
 
 	              ____         ____
 	VCC +5 o-----|____|---+---|____|---o GND
 	            NTC 10K   |     10K
+	                      | 
+	PIN A0 o--------------+
+
+*Or connecting NTC thermistor to GND:*
+
+	              ____         ____
+	VCC +5 o-----|____|---+---|____|---o GND
+	              10K     |   NTC 10K
 	                      | 
 	PIN A0 o--------------+
 
@@ -142,6 +154,119 @@ For a tutorial on how to install new libraries for use with the Arduino
 development environment please refer to the following website:
 http://www.arduino.cc/en/Reference/Libraries
 
+## How to use the library ##
+The library implement the type:
+```c++
+enum Thermistor_connection {
+  VCC,
+  GND
+  };
+```
+Usage:
+```c++
+// VCC or GND where thermistor configuration.
+//   If no value, use VCC as default.
+//
+double sensor0 = thermistor0.getTempCelsius(VCC); 
+//double sensor0 = thermistor0.getTempCelsius(GND);
+//double sensor0 = thermistor0.getTempCelsius();  /* VCC as default. */
+```
+### Constructors ###
+```c++
+// Constructor for thermistor 4 coefficients Steinhart-Hart equation.
+Thermistor::Thermistor(int PIN, 
+                       long RESISTOR, 
+                       long NTC_25C,
+                       double A, 
+                       double B, 
+                       double C, 
+                       double D, 
+                       float VREF)
+
+// Constructor for thermistor 3 coefficients Steinhart-Hart equation.
+//   Some manufacturers use C coefficient equal to 0 for simplicity.
+Thermistor::Thermistor(int PIN, 
+                       long RESISTOR, 
+                       long NTC_25C,
+                       double A, 
+                       double B, 
+                       double D, 
+                       float VREF)
+
+// Constructor for thermistor beta equation.
+Thermistor::Thermistor(int PIN, 
+                       long RESISTOR, 
+                       long NTC_25C,
+                       float BETA,
+                       float VREF){
+```
+Where:
+* **PIN** - Analog port for get ADC (analogRead() function)
+* **RESISTOR** - Value in ohms of resistor in voltage divisor.
+* **NTC_25C** - Resistence value of NTC thermistor at 298.15ºK (25ºC)
+* **A**, **B**, **C**, **D** - NTC Thermistor coefficients
+* **BETA** - Beta coefficient of NTC thermistor.
+* **VREF** - Voltage aplied to voltage divisor (usually VCC.)
+
+### Functions implamented ###
+```c++
+void setADC(int);
+void setEMA(float);
+
+double getTempKelvin(Thermistor_connection ConType);
+double getTempCelsius(Thermistor_connection ConType);
+double getTempFahrenheit(Thermistor_connection ConType);
+
+double fastTempKelvin(Thermistor_connection ConType);
+double fastTempCelsius(Thermistor_connection ConType);
+double fastTempFahrenheit(Thermistor_connection ConType);
+
+void calcBETA(float, long, float, long);
+```
+
+### Simple Example ###
+
+```c++
+#include <SteinhartHart.h>
+
+Thermistor thermistor0(/* PIN */       A0, 
+                      /* RESISTOR */  21900L, 
+                      /* NTC 25ºC */  9950L, 
+                      /* A */         3354016e-9, 
+                      /* B */         2569850e-10, 
+                      /* C */         2620131e-12, 
+                      /* D */         6383091e-14, 
+                      /* Vref */      5.03);
+
+Thermistor thermistor1(/* PIN */       A1, 
+                      /* RESISTOR */  21900L, 
+                      /* NTC 25ºC */  9950L, 
+                      /* BETA */      4190.0, 
+                      /* Vref */      5.03);
+
+void setup(void)
+{
+  Serial.begin(57600);
+}
+
+
+void loop(void) 
+{
+  double sensor0 = thermistor0.getTempCelsius(VCC);
+  Serial.print("Sensor0 - Temp(ºC): ");
+  Serial.println(sensor0);
+
+  double sensor1 = thermistor1.getTempCelsius(); 
+  Serial.print("Sensor1 - Temp(ºC): ");
+  Serial.println(sensor1);
+
+  double sensor1_fast = thermistor1.fastTempCelsius(); 
+  Serial.print("Sensor1 fast calc - Temp(ºC): ");
+  Serial.println(sensor1_fast);
+  
+  delay(1000);
+}
+```
 
 ## License ##
 
