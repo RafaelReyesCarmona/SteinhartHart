@@ -154,10 +154,12 @@ double Thermistor::fastTempFahrenheit(Thermistor_connection ConType){
 float Thermistor::getADC(int numsamples){
   float EMA_LOW;
 
+  int microdelay = 256000000 / F_CPU;
+
   EMA_LOW = analogRead(_PIN);
 
   for (byte i = numsamples; i--; ){
-    delayMicroseconds(120);
+    delayMicroseconds(microdelay);
     EMA_LOW = (_alphaEMA_LOW * (float)analogRead(_PIN)) + ((1.0 - _alphaEMA_LOW) * EMA_LOW);
   }
 
