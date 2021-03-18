@@ -45,8 +45,8 @@ where:
 * **T0** is 298'15 ºK (25 ºC)
 * **R** is the resistance at T (in ohms),
 * **NTC** is the resistence of thermistor at 298'15 ºK (25 ºC) 
-* **beta** are the Steinhart-Hart beta coefficient that vary depending on the type and model of Thermistor. 
-These can usually be found in the data sheet.
+* **beta** is the Steinhart-Hart beta coefficient that vary depending on the type and model of Thermistor. 
+It can usually be found in the data sheet.
 
 ## More Information ##
 
@@ -76,11 +76,14 @@ In this library, it is take the beta ecuation and calculate temperature of the t
 
 So we can solve using this formula:
 
-	          beta * T0
-	T = ----------------------
-	     beta + T0 * ln(R/NTC)
-	
-	(T0 = 298,15)
+![T=(beta * T0) / (beta + T0 * ln(R/NTC))](img/FastCalc.png)
+
+where:
+* **T** is the temperature (in kelvins)
+* **T0** is 298'15 ºK (25 ºC)
+* **R** is the resistance at T (in ohms),
+* **NTC** is the resistence of thermistor at 298'15 ºK (25 ºC) 
+* **beta** is the Steinhart-Hart beta coefficient that vary depending on the type and model of Thermistor. 
 
 The library is 14-29% faster than others libraries to
 get temperature from Thermistor if we compare this library 
