@@ -105,7 +105,7 @@ Testing **sensor0** Steinhart-Hart three orden equation, **sensor1** beta equati
 
 Beta is measured in degrees Kelvin (K) and is computed based on this equation:
 
-![b=ln(Rt1/Rt2) / ((1/T1)-(1/T2))](img/Beta.jpg)
+![b=ln(Rt1/Rt2) / ((1/T1)-(1/T2))](img/Beta.png)
 
 Where:
 * **Rt1** = Resistance at Temperature 1 (ohms) 
