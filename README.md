@@ -66,13 +66,7 @@ More information:
 
 In this library, it is take the beta ecuation and calculate temperature of the thermistor from it. 
 
-	 R     (beta/T - beta/298,15)                  beta   beta        ln(R/NTC)   1     1
-	--- = e                         ,, ln(R/NTC) = ---- - ------  ,,  --------- = - - ------- ,,
-	NTC                                             T     298,15        beta      T   298,15
- 
-	1      1     ln(R) - ln(NTC)        1     ln(R/NTC)     beta + 298,15 * ln(R/NTC)
-	- = ------ + ---------------  =  ------ + ---------  =  -------------------------
-	T   298,15        beta           298,15     beta             beta * 298,15
+![1/T=(beta + T0 * ln(R/NTC)/(beta * T0)](img/FastCalc_howto.png)
 
 So we can solve using this formula:
 
