@@ -48,6 +48,10 @@ where:
 * **beta** is the Steinhart-Hart beta coefficient that vary depending on the type and model of Thermistor. 
 It can usually be found in the data sheet.
 
+Some manufacturers have begun providing regression coefficients as an alternative to Steinhart–Hart coefficients.
+See this document for more information. ["Comments on the Steinhart–Hart Equation"](http://www.bapihvac.com/wp-content/uploads/SHH_Equation_Comments.pdf) 
+(PDF). Building Automation Products Inc. 11 November 2015. Retrieved 8 July 20]20
+
 ## More Information ##
 
 [Thermistor](https://en.wikipedia.org/wiki/Thermistor?wprov=sfla1) is the principal element of temperature sensor.
