@@ -52,6 +52,15 @@ Some manufacturers have begun providing regression coefficients as an alternativ
 See this document for more information. ["Comments on the Steinhart–Hart Equation"](http://www.bapihvac.com/wp-content/uploads/SHH_Equation_Comments.pdf) 
 (PDF). Building Automation Products Inc. 11 November 2015. Retrieved 8 July 20]20
 
+The most general form of the equation can be derived from extending the B parameter equation to an infinite series:
+
+![Steinhart-Hart_beta-dev](img/Steinhart-Hart_beta-dev.png)
+
+You can get more information in this document:
+Matus, Michael (October 2011). 
+[Temperature Measurement in Dimensional Metrology](https://oar.ptb.de/files/download/56d6a9edab9f3f76468b4643) 
+– Why the Steinhart–Hart Equation works so well. MacroScale 2011. Wabern, Switzerland
+
 ## More Information ##
 
 [Thermistor](https://en.wikipedia.org/wiki/Thermistor?wprov=sfla1) is the principal element of temperature sensor.
