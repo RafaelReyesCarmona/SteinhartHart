@@ -26,7 +26,8 @@ In the standard Steinhart-Hart equation the C parameter is set to zero.
 However, some manufacturers use all 4 coefficients. So we can use standard Steinhart-Hart
 ecuation with 3 coefficients. 
 
-![Steinhart-Hart_3](img/Steinhart-Hart_3.png)
+<p align=center><img src="img/Steinhart-Hart_3.png" alt="Steinhart-Hart_3" 
+width=80%></p>
 
 where:
 * **T** is the temperature (in kelvins),
