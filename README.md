@@ -12,7 +12,7 @@ Library to used to derive a precise temperature of a thermistor, fastest Calc. (
 
 ## Information ##
 
-All the work have been moved to [ThermistorNTC library](https://github.com/RafaelReyesCarmona/ThermistorNTC). 
+All the work have been moved to [ThermistorNTC library](https://github.com/RafaelReyesCarmona/ThermistorNTC).
 
 ## How to use Thermistor as temperature sensor ##
 
@@ -104,6 +104,7 @@ Where:
 * **VREF** - Voltage aplied to voltage divisor (usually VCC.)
 
 ### Functions implamented ###
+
 ```c++
 void setADC(int);
 void setEMA(float);
@@ -115,8 +116,6 @@ double getTempFahrenheit(Thermistor_connection ConType);
 double fastTempKelvin(Thermistor_connection ConType);
 double fastTempCelsius(Thermistor_connection ConType);
 double fastTempFahrenheit(Thermistor_connection ConType);
-
-void calcBETA(float, long, float, long);
 ```
 
 ### Simple Example ###

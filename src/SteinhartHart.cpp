@@ -1,15 +1,15 @@
 /*
-SteinhartHart.cpp - Library to used to derive a precise temperature of a thermistor, 
+SteinhartHart.cpp - Library to used to derive a precise temperature of a thermistor,
 fastest Calc (26~18% faster)
 v0.1.1
 
-Copyright © 2021 Francisco Rafael Reyes Carmona. 
-All rights reserved. 
+Copyright © 2021 Francisco Rafael Reyes Carmona.
+All rights reserved.
 
-rafael.reyes.carmona@gmail.com 
+rafael.reyes.carmona@gmail.com
 
 
-  This file is part of SteinhartHart. 
+  This file is part of SteinhartHart.
 
   SteinhartHart is free software: you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
@@ -27,16 +27,16 @@ rafael.reyes.carmona@gmail.com
 */
 
 #include "SteinhartHart.h"
-#include <math.h>	
+#include <math.h>
 
-// Constructor para 4 parametros (A,B,C,D).	
-Thermistor::Thermistor(int PIN, 
-                       long RESISTOR, 
+// Constructor para 4 parametros (A,B,C,D).
+Thermistor::Thermistor(int PIN,
+                       long RESISTOR,
                        long NTC_25C,
-                       double A, 
-                       double B, 
-                       double C, 
-                       double D, 
+                       double A,
+                       double B,
+                       double C,
+                       double D,
                        float VREF){
   _PIN = PIN;
   _RESISTOR = RESISTOR;
@@ -51,12 +51,12 @@ Thermistor::Thermistor(int PIN,
 }
 
 // Constructor para 3 parametros (A,B,D.. C = 0).
-Thermistor::Thermistor(int PIN, 
-                       long RESISTOR, 
+Thermistor::Thermistor(int PIN,
+                       long RESISTOR,
                        long NTC_25C,
-                       double A, 
-                       double B, 
-                       double D, 
+                       double A,
+                       double B,
+                       double D,
                        float VREF){
   _PIN = PIN;
   _RESISTOR = RESISTOR;
@@ -70,8 +70,8 @@ Thermistor::Thermistor(int PIN,
 }
 
 // Constructor para parametro BETA del termistor.
-Thermistor::Thermistor(int PIN, 
-                       long RESISTOR, 
+Thermistor::Thermistor(int PIN,
+                       long RESISTOR,
                        long NTC_25C,
                        float BETA,
                        float VREF){
@@ -87,33 +87,33 @@ Thermistor::Thermistor(int PIN,
 
 void Thermistor::SteinhartHart(Thermistor_connection ConType){
   float E = log(calcNTC(ConType)/(float)_NTC_25C);
-  if(_DEBUG_TIME) _time = micros(); 
+  if(_DEBUG_TIME) _time = micros();
   _temp_k = _A + (_B*E) + (_C*(E*E)) + (_D*(E*E*E));
   _temp_k = 1.0 / _temp_k;
   _temp_c = _temp_k - 273.15;
-  if (_DEBUG_TIME) Serial.print(micros()-_time); 
+  if (_DEBUG_TIME) Serial.print(micros()-_time);
 }
 
 
 void Thermistor::SteinhartHart_beta(Thermistor_connection ConType){
   _temp_k = log(calcNTC(ConType)/(float)_NTC_25C);
-  if(_DEBUG_TIME) _time = micros(); 
+  if(_DEBUG_TIME) _time = micros();
   _temp_k /= _BETA;
   _temp_k += 1.0 / 298.15;
   _temp_k = 1.0 / _temp_k;
   _temp_c = _temp_k - 273.15;
-  if (_DEBUG_TIME) Serial.print(micros()-_time); 
+  if (_DEBUG_TIME) Serial.print(micros()-_time);
 }
 
 
 void Thermistor::SteinhartHart_fast(Thermistor_connection ConType){
   _temp_k = log(calcNTC(ConType)/(float)_NTC_25C);
-  if(_DEBUG_TIME) _time = micros(); 
+  if(_DEBUG_TIME) _time = micros();
   _temp_k *= 298.15;
   _temp_k += _BETA;
   _temp_k = (_BETA * 298.15) / _temp_k;
-  _temp_c = _temp_k - 273.15; 
-  if (_DEBUG_TIME) Serial.print(micros()-_time); 
+  _temp_c = _temp_k - 273.15;
+  if (_DEBUG_TIME) Serial.print(micros()-_time);
 }
 
 
@@ -180,13 +180,6 @@ double Thermistor::calcNTC(Thermistor_connection ConType){
     NTC /= (_VREF - NTC);
     NTC *= (float)_RESISTOR;
     return NTC;
-}
-
-
-void Thermistor::calcBETA(float T1, long RT1, float T2, long RT2){
-  _BETA = log(RT1/RT2);
-  _BETA *= T1 * T2;
-  _BETA /= (T2 - T1);
 }
 
 
